@@ -1,17 +1,38 @@
 ## 我的修改
-增加生成SSH Link功能，方便收藏，下次使用不需要输入密码。
+增加生成SSH Link功能，方便收藏，下次使用不需要输入密码。  
 ![image](https://github.com/crazypeace/huashengdun-webssh/assets/665889/123a33bd-9514-46a5-8e64-d7a82b7f6f19)
 
-SSH Link 可以带一个命令参数. 登录完成后就执行命令.  
-[![](https://res.cloudinary.com/marcomontalbano/image/upload/v1726912439/video_to_markdown/images/youtube--hCoAy06NA4k-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://www.youtube.com/watch?v=hCoAy06NA4k "")
-
-部署到容器的教程:
-
+部署到容器的教程:  
 https://zelikk.blogspot.com/2023/10/huashengdun-webssh-codesandbox.html
 
-补充 部署到Hugging Face的教程 / 作者 Xiang xjfkkk
+## 各容器启动命令稍有不同
+> 默认外部端口：`8888`，协议：`http`
 
-https://linux.do/t/topic/135264
+- **CodeSandbox**：用 `python official` 版部署，不支持v6的vps。其他平台均支持。
+```
+pip install webssh
+wssh --xsrf=False --xheaders=False --origin='*' --debug --delay=6
+```
+
+- **Koyeb**：链接`github`部署，可选 `buildpack` 和 `web services`；也可选 `dockerfile`方式
+```
+python run.py --xsrf=False --xheaders=False --origin='*' --debug --delay=6
+```
+
+- **render**：链接`github`部署，选择 `python3`
+    - 构建命令
+    ```
+    pip install -r requirements.txt
+    ```
+    - 启动命令
+    ```
+    python run.py --xsrf=False --xheaders=False --origin='*' --debug --delay=6
+    ```
+
+- **northflank**：链接github部署，改Dockerfile最后一行
+```
+CMD ["python", "run.py", "--xsrf=False --xheaders=False --origin='*' --debug --delay=6"]
+```
 
 <details>
     <summary>原项目readme (点击展开)</summary>
